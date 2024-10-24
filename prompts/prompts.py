@@ -23,17 +23,11 @@ Give the question only without any acknowledgement or extra words.
 rag_prompt_template = """human
 
 You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question.
-If you don't know the answer, just say that you don't know. Keep the answer concise.
-Show the resources you use to answer the question. 
-If the resources are linked show them like this:
-Resources:
-[1] https://www.example.com
-[2] https://www.example.com
+Keep the answer concise.
+Show the resources where the content come from, the resources may be URLs OR page numbers. 
+Please include the sources of the information, which can be URLs or page numbers. 
 
-If the resources are not linked show them like this:
-Resources:
-- Page number <page number>
-IGNORE image path
+IGNORE image paths and page content, just show image number if found.
 
 Question: {question} 
 

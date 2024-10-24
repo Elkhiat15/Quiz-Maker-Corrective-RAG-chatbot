@@ -33,7 +33,7 @@ class VectorDB:
         return Chroma.from_documents(
             documents=self.documents,
             collection_name=COLLECTION_NAME,
-            persist_directory=PERSIST_DIRECTORY,
+            # persist_directory=PERSIST_DIRECTORY,
             embedding=self.embeddings
         )
     

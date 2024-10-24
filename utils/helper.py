@@ -34,7 +34,7 @@ def get_description(img_data , context: str):
     mime_type = 'image/png' # if img_path.lower().endswith('.png') else 'image/jpeg'
 
     # Create a HumanMessage object with the prompt and image
-    accident_message = HumanMessage(
+    input_message = HumanMessage(
         content=[
             {"type": "text", "text": description_prompt.format(context = context, format_instructions=parser.get_format_instructions())},
             {
@@ -45,7 +45,7 @@ def get_description(img_data , context: str):
     )
 
     llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", max_tokens=1024)
-    response = llm.invoke([accident_message])
+    response = llm.invoke([input_message])
     # Parse the response using the Pydantic parser
     parsed_response = parser.parse(response.content)
 

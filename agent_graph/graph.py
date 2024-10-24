@@ -1,6 +1,6 @@
 from langgraph.graph import END, StateGraph
 from typing_extensions import TypedDict
-from typing import List
+from typing import List, Any
 from agents.agents import (
     retrieve,
     grade_documents,
@@ -21,11 +21,13 @@ class GraphState(TypedDict):
         web_search: whether to add search
         documents: list of documents
     """
-    question : str
-    generation : str
-    web_search : str
-    documents : List[str]
-    relevant_images : List[str]
+    question: str
+    generation: str
+    web_search: str
+    retriever: Any
+    documents: List[str]
+    relevant_images: List[str]
+
 
 # Create
 def create_graph():
@@ -34,7 +36,7 @@ def create_graph():
     # Define the nodes
     graph.add_node("retrieve", retrieve)  # retrieve
     graph.add_node("grade_documents", grade_documents)  # grade documents
-    graph.add_node("generate", generate)  # generatae
+    graph.add_node("generate", generate)  # generate
     graph.add_node("transform_query", transform_query)  # transform_query
     graph.add_node("web_search_node", web_search)  # web search
 
@@ -55,7 +57,9 @@ def create_graph():
 
     return graph
 
+
 # Compile
-def compile_workflow(graph):
+def compile_workflow():
+    graph = create_graph()
     workflow = graph.compile()
     return workflow
